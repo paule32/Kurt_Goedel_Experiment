@@ -1,5 +1,5 @@
 -- --------------------------------------------------------------------------------------
--- de_duden.sql: Stand: Dezember 2022
+-- de_config.sql: Stand: Dezember 2022
 --
 -- (c) 2022 by Jens Kallup - paule32 <paule32.jk@gmail.com>
 -- all rights reserved.
@@ -15,37 +15,42 @@
 -- informationen entsteht bzw. enstanden ist.
 -- Die Nutzung erfolgt stets auf Eigene Gefahr !!!
 -- --------------------------------------------------------------------------------------
--- WARNUNG: Die Datenbank "p_duden" wird gelöscht.
---          Sichern Sie daher ggf. existierende Datenbank-Informationen vorher !!!
+-- Pronomen:
 -- --------------------------------------------------------------------------------------
-set @Author       = "Jebs Kallup";
-set @AvatarNick   = "paule32"    ;
-set @LastUpdate   = "2022-12-20" ;
-
--- --------------------------------------------------------------------------------------
--- prepare some init stuff ...
--- --------------------------------------------------------------------------------------
-source de_config.sql;
-
-drop   schema p_duden;
-create schema p_duden DEFAULT CHARACTER SET utf8mb4;
-use           p_duden;
-
-source in_proc.sql;   -- custom sql procedure
-source in_func.sql;   -- custom sql function
+set @Personal     :=  1;  -- persönliches      Fürwort
+set @Possesiv     :=  2;  -- besitzanzeigendes Fürwort
+set @Reflexiv     :=  3;  -- rückbezügliches   Fürwort
+set @Demonstrativ :=  4;  -- hinweisendes      Fürwort
+set @Indefinit    :=  5;  -- unbestimmtes      Fürwort
+set @Relativ      :=  6;  -- bezügliches       Fürwort
+set @Interrogativ :=  7;  -- Frage             Fürwort
 
 -- --------------------------------------------------------------------------------------
--- data Information files, splitted because the space ...
+-- Personal -pronomen:
 -- --------------------------------------------------------------------------------------
-source de_duden_wrarten.sql;
-source de_duden_pronome.sql;
-source de_duden.sql;
+set @singular     :=  1;  -- Einzahl
+set @plural       :=  2;  -- Mehrzahl
+set @formal       :=  3;  -- Formal
 
-source de_duden_verblst.sql;
+set @nominativ    :=  1;
+set @akkusativ    :=  2;
+set @genitiv      :=  3;
+set @dativ        :=  4;
 
-source de_duden_verb_aa.sql;
-source de_duden_verb_ab.sql;
+set @maskulin     :=  1;  -- männlich
+set @feminin      :=  2;  -- weiblich
+set @neutral      :=  3;  -- sächlich
 
-source de_duden_wfragen.sql;
-
-show tables;
+-- --------------------------------------------------------------------------------------
+-- Wortarten:
+-- --------------------------------------------------------------------------------------
+set @Nomen        :=  1;
+set @Artikel      :=  2;
+set @Adjektiv     :=  3;
+set @Pronomen     :=  4;
+set @Numeral      :=  5;
+set @Verb         :=  6;
+set @Adverb       :=  7;
+set @Praeposition :=  8;
+set @Konjunktion  :=  9;
+set @Interjektion := 10;

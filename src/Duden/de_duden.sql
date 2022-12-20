@@ -15,40 +15,46 @@
 -- informationen entsteht bzw. enstanden ist.
 -- Die Nutzung erfolgt stets auf Eigene Gefahr !!!
 -- --------------------------------------------------------------------------------------
--- WARNUNG: Die Datenbank "p_duden" wird gelöscht.
---          Sichern Sie daher ggf. existierende Datenbank-Informationen vorher !!!
--- --------------------------------------------------------------------------------------
 
 -- --------------------------------------------------------------------------------------
 -- Super-Class: Duden
 -- --------------------------------------------------------------------------------------
-drop   table if     exists de_buch ;
-create table if not exists de_buch (
-  de_id       bigint not null auto_increment unique primary key,
-  de_wort     varchar(84),
-  de_art      tinyint,
+drop   table if     exists de_duden ;
+create table if not exists de_duden (
+  de_id       bigint   not null auto_increment unique primary key,
+  de_wort     varchar(84),                  -- Wort
+  de_art      tinyint,                      -- Wortart
+  de_mfn      tinyint  not null default 0,  -- 1:maskulin, 2:feminin, 3:neutral/sachlich
+  de_dekli    boolean  not null default 1,
   last_update datetime not null on update current_timestamp default now()
 );
-insert into de_buch (de_wort,de_art) values ("aal|en"        ,@verb);
-insert into de_buch (de_wort,de_art) values ("aal|te"        ,@verb);
-insert into de_buch (de_wort,de_art) values ("aas|en"        ,@verb);
-insert into de_buch (de_wort,de_art) values ("aal|t"         ,@verb);
+call in_duden("Aal"           ,@nomen,1);
+call in_duden("aal|en"        ,@verb ,0);
+call in_duden("aal|te"        ,@verb ,0);
+call in_duden("aas|en"        ,@verb ,0);
+call in_duden("aal|t"         ,@verb ,0);
 
-insert into de_buch (de_wort,de_art) values ("ab-änder|n"    ,@verb);
-insert into de_buch (de_wort,de_art) values ("ab-äst|en"     ,@verb);
-insert into de_buch (de_wort,de_art) values ("ab-ätz|en"     ,@verb);
-insert into de_buch (de_wort,de_art) values ("ab|ge|änder|t" ,@verb);
-insert into de_buch (de_wort,de_art) values ("ab|ge|äst|et"  ,@verb);
-insert into de_buch (de_wort,de_art) values ("ab|ge|ätz|t"   ,@verb);
+call in_duden("ab-arbeit|en"  ,@verb ,0);
+call in_duden("ab-ast|en"     ,@verb ,0);
+call in_duden("ab-atm|en"     ,@verb ,0);
 
-insert into de_buch (de_wort,de_art) values ("änder|t"       ,@verb);
-insert into de_buch (de_wort,de_art) values ("änder|te"      ,@verb);
+call in_duden("ab-änder|n"    ,@verb ,0);
+call in_duden("ab-ängstig|en" ,@verb ,0);
+call in_duden("ab-äs|en"      ,@verb ,0);
+call in_duden("ab-äst|en"     ,@verb ,0);
+call in_duden("ab-ätz|en"     ,@verb ,0);
+call in_duden("ab|ge|änder|t" ,@verb ,0);
+call in_duden("ab|ge|äst|et"  ,@verb ,0);
+call in_duden("ab|ge|ätz|t"   ,@verb ,0);
 
-insert into de_buch (de_wort,de_art) values ("äst|et"        ,@verb);
-insert into de_buch (de_wort,de_art) values ("äst|ete"       ,@verb);
+call in_duden("änder|t"       ,@verb ,0);
+call in_duden("änder|te"      ,@verb ,0);
 
-insert into de_buch (de_wort,de_art) values ("ätz|t"         ,@verb);
-insert into de_buch (de_wort,de_art) values ("ätz|te"        ,@verb);
+call in_duden("äst|et"        ,@verb ,0);
+call in_duden("äst|ete"       ,@verb ,0);
 
-insert into de_buch (de_wort,de_art) values ("ge|aal|t"      ,@verb);
-insert into de_buch (de_wort,de_art) values ("ge|aas|t"      ,@verb);
+call in_duden("ätz|t"         ,@verb ,0);
+call in_duden("ätz|te"        ,@verb ,0);
+
+call in_duden("ge|aal|t"      ,@verb ,0);
+call in_duden("ge|aas|t"      ,@verb ,0);

@@ -21,8 +21,8 @@
 -- --------------------------------------------------------------------------------------
 drop   table if     exists de_duden_verb_aa ;
 create table if not exists de_duden_verb_aa (
-  de_id   bigint not null auto_increment unique primary key,
-  de_wort int,
+  de_id       bigint not null auto_increment unique primary key,
+  de_wort     int,
   last_update datetime not null on update current_timestamp default now()
 );
 INSERT INTO de_duden_verb_aa (de_wort) SELECT de_id FROM de_duden WHERE de_duden.de_wort = 'aal|te';

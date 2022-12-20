@@ -15,32 +15,6 @@
 -- informationen entsteht bzw. enstanden ist.
 -- Die Nutzung erfolgt stets auf Eigene Gefahr !!!
 -- --------------------------------------------------------------------------------------
--- Pronomen:
--- --------------------------------------------------------------------------------------
-set @Personal     := 1;  -- persönliches      Fürwort
-set @Possesiv     := 2;  -- besitzanzeigendes Fürwort
-set @Reflexiv     := 3;  -- rückbezügliches   Fürwort
-set @Demonstrativ := 4;  -- hinweisendes      Fürwort
-set @Indefinit    := 5;  -- unbestimmtes      Fürwort
-set @Relativ      := 6;  -- bezügliches       Fürwort
-set @Interrogativ := 7;  -- Frage             Fürwort
-
--- --------------------------------------------------------------------------------------
--- Personal -pronomen:
--- --------------------------------------------------------------------------------------
-set @singular  := 1;  -- Einzahl
-set @plural    := 2;  -- Mehrzahl
-set @formal    := 3;  -- Formal
-
-set @nominativ := 1;
-set @akkusativ := 2;
-set @genitiv   := 3;
-set @dativ     := 4;
-
-set @maskulin  := 1;  -- männlich
-set @feminin   := 2;  -- weiblich
-set @neutral   := 3;  -- sächlich
-
 drop   table if     exists de_pronomen ;
 create table if not exists de_pronomen (
   de_id        tinyint not null auto_increment unique primary key,
@@ -54,18 +28,18 @@ create table if not exists de_pronomen (
 -- --------------------------------------------------------------------------------------
 -- Personal-pronomen: Singular/Einzahl:
 -- --------------------------------------------------------------------------------------
-insert into de_pronomen (de_art,de_anzahl,de_nominativ,de_akkusativ,de_dativ) values (@Personal,@Singular,"ich","mich","mir");
-insert into de_pronomen (de_art,de_anzahl,de_nominativ,de_akkusativ,de_dativ) values (@Personal,@Singular,"du" ,"dich","dir");
-insert into de_pronomen (de_art,de_anzahl,de_nominativ,de_akkusativ,de_dativ) values (@Personal,@Singular,"er" ,"ihn" ,"ihm");
-insert into de_pronomen (de_art,de_anzahl,de_nominativ,de_akkusativ,de_dativ) values (@Personal,@Singular,"sie","sie" ,"ihr");
-insert into de_pronomen (de_art,de_anzahl,de_nominativ,de_akkusativ,de_dativ) values (@Personal,@Singular,"es" ,"es"  ,"ihm");
+call in_pronomen(@Personal,@Singular,"ich","mich","mir"  );
+call in_pronomen(@Personal,@Singular,"du" ,"dich","dir"  );
+call in_pronomen(@Personal,@Singular,"er" ,"ihn" ,"ihm"  );
+call in_pronomen(@Personal,@Singular,"sie","sie" ,"ihr"  );
+call in_pronomen(@Personal,@Singular,"es" ,"es"  ,"ihm"  );
 -- --------------------------------------------------------------------------------------
 -- Personal-pronomen: Plural/Mehrzahl:
 -- --------------------------------------------------------------------------------------
-insert into de_pronomen (de_art,de_anzahl,de_nominativ,de_akkusativ,de_dativ) values (@Personal,@plural,"wir","uns" ,"uns"  );
-insert into de_pronomen (de_art,de_anzahl,de_nominativ,de_akkusativ,de_dativ) values (@Personal,@plural,"ihr","euch","euch" );
-insert into de_pronomen (de_art,de_anzahl,de_nominativ,de_akkusativ,de_dativ) values (@Personal,@plural,"sie","sie" ,"ihnen");
+call in_pronomen(@Personal,@Singular,"wir","uns" ,"uns"  );
+call in_pronomen(@Personal,@Singular,"ihr","euch","euch" );
+call in_pronomen(@Personal,@Singular,"sie","sie" ,"ihnen");
 -- --------------------------------------------------------------------------------------
 -- Personal-pronomen: Formal
 -- --------------------------------------------------------------------------------------
-insert into de_pronomen (de_art,de_anzahl,de_nominativ,de_akkusativ,de_dativ) values (@Personal,@formal,"sie","sie","ihnen");
+call in_pronomen(@Personal,@formal  ,"sie","sie" ,"ihnen");

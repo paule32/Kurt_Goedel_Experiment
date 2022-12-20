@@ -1,5 +1,5 @@
 -- --------------------------------------------------------------------------------------
--- de_duden.sql: Stand: Dezember 2022
+-- in_proc.sql: Stand: Dezember 2022
 --
 -- (c) 2022 by Jens Kallup - paule32 <paule32.jk@gmail.com>
 -- all rights reserved.
@@ -15,37 +15,48 @@
 -- informationen entsteht bzw. enstanden ist.
 -- Die Nutzung erfolgt stets auf Eigene Gefahr !!!
 -- --------------------------------------------------------------------------------------
--- WARNUNG: Die Datenbank "p_duden" wird gelöscht.
---          Sichern Sie daher ggf. existierende Datenbank-Informationen vorher !!!
+
+drop procedure if exists in_pronomen;
+drop procedure if exists in_wortart;
+drop procedure if exists in_duden  ;
+
+delimiter //
 -- --------------------------------------------------------------------------------------
-set @Author       = "Jebs Kallup";
-set @AvatarNick   = "paule32"    ;
-set @LastUpdate   = "2022-12-20" ;
-
+-- placeholder for insert into de_pronomen ...
 -- --------------------------------------------------------------------------------------
--- prepare some init stuff ...
+create procedure in_pronomen(
+  p1 tinyint,
+  p2 tinyint,
+  p3 char(5),
+  p4 char(5),
+  p5 char(5))
+begin
+  insert into de_pronomen(
+  de_art,de_anzahl,de_nominativ,de_akkusativ,de_dativ)
+  values(
+  p1,p2,
+  p3,p4,p5);
+end;
 -- --------------------------------------------------------------------------------------
-source de_config.sql;
-
-drop   schema p_duden;
-create schema p_duden DEFAULT CHARACTER SET utf8mb4;
-use           p_duden;
-
-source in_proc.sql;   -- custom sql procedure
-source in_func.sql;   -- custom sql function
-
+-- placeholder for insert into de_wortart ...
 -- --------------------------------------------------------------------------------------
--- data Information files, splitted because the space ...
+create procedure in_wortart(p1 boolean, p2 varchar(15))
+begin
+  insert into de_wortart(
+  de_dek,de_bez)
+  values(p1,p2);
+end;
 -- --------------------------------------------------------------------------------------
-source de_duden_wrarten.sql;
-source de_duden_pronome.sql;
-source de_duden.sql;
-
-source de_duden_verblst.sql;
-
-source de_duden_verb_aa.sql;
-source de_duden_verb_ab.sql;
-
-source de_duden_wfragen.sql;
-
-show tables;
+-- placeholder for insert into de_duden ...
+-- --------------------------------------------------------------------------------------
+create procedure in_duden(
+  p1 varchar(84),
+  p2 tinyint,
+  p3 tinyint)
+begin
+  insert into de_duden (de_wort,de_art,de_mfn)
+  values(
+  p1,p2,p3);
+end;
+//
+delimiter ;

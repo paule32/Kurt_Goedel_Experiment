@@ -87,16 +87,6 @@
 -- Interjektionale Wörter geben Empfindungen, Gefühle, Ausrufe und Geräusche wieder.
 -- Sie werden deshalb auch als Wmpfindungs- oder Ausrufe-wörter bezeichnet.
 -- --------------------------------------------------------------------------------------
-set @Nomen        :=  1;
-set @Artikel      :=  2;
-set @Adjektiv     :=  3;
-set @Pronomen     :=  4;
-set @Numeral      :=  5;
-set @Verb         :=  6;
-set @Adverb       :=  7;
-set @Praeposition :=  8;
-set @Konjunktion  :=  9;
-set @Interjektion := 10;
 
 -- --------------------------------------------------------------------------------------
 -- Nomen        - Namen-wort
@@ -110,20 +100,20 @@ set @Interjektion := 10;
 -- Konjunktion  - Binde-wort
 -- Interjektion - Empfindungs-wort
 -- --------------------------------------------------------------------------------------
-drop table if exists de_wortart;
+drop   table if     exists de_wortart ;
 create table if not exists de_wortart (
   de_id       tinyint not null auto_increment unique primary key,
   de_dek      boolean not null default 0, -- deklariert: ja/nein => 1/0
   de_bez      varchar(15),                -- Bezeichner
   last_update datetime not null on update current_timestamp default now()
 );
-insert into de_wortart (de_dek,de_bez) values (1,"Nomen"       );
-insert into de_wortart (de_dek,de_bez) values (1,"Artikel"     );
-insert into de_wortart (de_dek,de_bez) values (1,"Adjektiv"    );
-insert into de_wortart (de_dek,de_bez) values (1,"Pronomen"    );
-insert into de_wortart (de_dek,de_bez) values (1,"Numeral"     );
-insert into de_wortart (de_dek,de_bez) values (1,"Verb"        );
-insert into de_wortart (de_dek,de_bez) values (0,"Adverb"      );
-insert into de_wortart (de_dek,de_bez) values (0,"Präposition" );
-insert into de_wortart (de_dek,de_bez) values (0,"Konjunktion" );
-insert into de_wortart (de_dek,de_bez) values (0,"Interjektion");
+call in_wortart(1,"Nomen"       );
+call in_wortart(1,"Artikel"     );
+call in_wortart(1,"Adjektiv"    );
+call in_wortart(1,"Pronomen"    );
+call in_wortart(1,"Numeral"     );
+call in_wortart(1,"Verb"        );
+call in_wortart(0,"Adverb"      );
+call in_wortart(0,"Präposition" );
+call in_wortart(0,"Konjunktion" );
+call in_wortart(0,"Interjektion");
